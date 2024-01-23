@@ -46,6 +46,10 @@ function fwd_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
+	// Custom Crop Sizes
+	add_image_size( 'portrait-blog', 200, 250, true );
+	add_image_size( 'landscape-blog', 400, 200, true );
+
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
@@ -149,7 +153,7 @@ function fwd_widgets_init() {
 	);
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar 2', 'fwd' ),
+			'name'          => esc_html__( 'Page Sidebar', 'fwd' ),
 			'id'            => 'sidebar-2',
 			'description'   => esc_html__( 'Add widgets here.', 'fwd' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',

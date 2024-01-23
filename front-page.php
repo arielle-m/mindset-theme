@@ -21,10 +21,12 @@ get_header();
 		while ( have_posts() ) :
 			the_post();
 
-			get_template_part( 'template-parts/content', 'page' );
+			// get_template_part( 'template-parts/content', 'page' );
 			?>
 
-			<section class="home-intro"></section>
+			<section class="home-intro">
+				<?php the_post_thumbnail( 'large' ); ?>
+			</section>
 
 			<section class="home-work"></section>
 
@@ -37,7 +39,45 @@ get_header();
 			<section class="home-slider"></section>
 
 			<section class="home-blog"></section>
+				<!-- escapes html, makes it translatable, and echoes it out -->
+				<h2><?php esc_html_e( 'Latest Blog Posts', 'fwd' ); ?></h2>
+				<?php
+					// doesn't need to be args but jonathon always uses it so
+					// this makes a request to the database
+					$args = array(
+						// do i want it to look at the post or pages database:
+						'post_type'			=> 'post',
 
+						// by default, always takes the 2 most recent blog posts
+						'posts_per_page'	=> 4,
+					);
+
+					// sends query to database
+					$blog_query = new WP_Query( $args );
+
+					// if generates results, run statement
+					if ( $blog_query -> have_posts() ) {
+						// runs through the query as long as it has posts
+						while ( $blog_query -> have_posts() ) {
+							// make sure its the_post, not the_posts, because then it runs an infinite loop and crashes
+							$blog_query -> the_post();
+							?>
+
+							<!-- then we put the html for the article here -->
+							<article>
+								<a href="<?php the_permalink(); ?>">
+								<?php the_post_thumbnail( 'landscape-blog' ); ?>
+									<h3><?php the_title() ?></h3>
+									<p><?php the_date() ?></p>
+								</a>
+							</article>
+
+							<?php
+						}
+
+						wp_reset_postdata();
+					}
+				?>
 			<?php
 		endwhile; // End of the loop.
 		?>
@@ -45,5 +85,5 @@ get_header();
 	</main><!-- #primary -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();
