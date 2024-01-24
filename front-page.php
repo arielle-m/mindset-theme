@@ -26,6 +26,13 @@ get_header();
 
 			<section class="home-intro">
 				<?php the_post_thumbnail( 'large' ); ?>
+				<?php 
+				if ( function_exists( 'get_field' ) ) {
+					if ( get_field( 'top_section' ) ) {
+						the_field( 'top_section' );
+					}
+				}
+				?>
 			</section>
 
 			<section class="home-work"></section>
@@ -33,9 +40,35 @@ get_header();
 			<section class="home-work"></section>
 
 			<section class="home-left"></section>
+			<?php
+			if ( function_exists( 'get_field' ) ) {
 
+				if ( get_field( 'left_section_heading' ) ) {
+					echo '<h2>' . esc_html( get_field( 'left_section_heading' ) ) . '</h2>';
+				}
+
+				if ( get_field( 'left_section_content' ) ) {
+					echo '<p>' . esc_html( get_field( 'left_section_content' ) ) . '</p>';
+				}
+			}
+			?>
 			<section class="home-right"></section>
+			<?php
+			if ( function_exists( 'get_field' ) ) {
 
+				if ( get_field( 'right_section_heading' ) ) {
+					echo '<h2>';
+					the_field( 'right_section_heading' );
+					echo '</h2>';
+				}
+
+				if ( get_field( 'right_section_content' ) ) {
+					echo '<p>';
+					the_field( 'right_section_content' );
+					echo '</p>';
+				}
+			}
+			?>
 			<section class="home-slider"></section>
 
 			<section class="home-blog"></section>

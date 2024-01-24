@@ -201,3 +201,86 @@ require get_template_directory() . '/inc/customizer.php';
 if ( defined( 'JETPACK__VERSION' ) ) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+
+// Add Theme Color Meta Tag
+function fwd_theme_color() {
+    echo '<meta name="theme-color" content="#fff200">';
+}
+// we add add_action so the function actually runs
+add_action( 'wp_head', 'fwd_theme_color', 1 );
+
+// Change the Excerpt Length to 20 words
+function fwd_excerpt_length( $length ) {
+	return 20;
+}
+add_filter( 'excerpt_length', 'fwd_excerpt_length', 999);
+
+// Chnage the excerpt more (read more) text
+function fwd_excerpt_more( $more ) {
+	// we're assuming that this is being run in a loop, so it's okay to use the get_permalink
+	$more = '... <a class="read-more" href="' . esc_url( get_permalink() ) . '">Continue Reading</a>';
+	return $more;
+}
+add_filter( 'excerpt_more', 'fwd_excerpt_more' );
+
+// Create Block Templates for Pages
+function fwd_block_editor_templates() {
+    // Replace '14' with the Page ID
+    if ( isset( $_GET['post'] ) && '61' == $_GET['post'] ) {
+        $post_type_object = get_post_type_object( 'page' );
+        $post_type_object->template = array(
+            // define blocks here...
+
+			// one way to do it:
+			// array( 'core/paragraph' ),
+			// array( 'core/heading' ),
+			// array( 'core/image' ),
+			// array( 'core/paragraph' ),
+
+			// another, more advanced, way to do it:
+
+			// each array is a block, and the stuff nested inside are attributes
+			array( 
+				'core/paragraph', 
+				array( 
+					'placeholder' => 'Add your introduction here...'
+				) 
+			),
+			array( 
+				'core/heading', 
+				array( 
+					'placeholder' => 'Add your heading here...',
+					'level' => 2
+				) 
+			),
+			array( 
+				'core/image', 
+				array( 
+					'align' => 'left', 
+					'sizeSlug' => 'medium' 
+				)
+			),
+			array( 
+				'core/paragraph', 
+				array( 
+					'placeholder' => 'Add text here...'
+				) 
+			),
+        );
+		// prevent the user from adding, removing, or moving blocks in our template
+		$post_type_object->template_lock = 'all';
+    }
+}
+add_action( 'init', 'fwd_block_editor_templates' );
+
+// Remove the block editor from certain pages
+function fwd_post_filter( $use_block_editor, $post ) {
+    // Change 81 to your Page ID
+    $page_ids = array( 81 );
+    if ( in_array( $post->ID, $page_ids ) ) {
+        return false;
+    } else {
+        return $use_block_editor;
+    }
+}
+add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );

@@ -17,6 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
+	<!-- we add this as a hook so that if someone makes a child of our theme, they can choose to remove the hook, modify it, or keep it -->
 	<?php wp_head(); ?>
 </head>
 
