@@ -15,7 +15,7 @@
 		<?php 
 			// checks if page id is the same as the contact page id of 12
 			// if on the contact page, it won't show the address and email in the footer
-			if ( function_exists( 'get_field') && !(get_the_ID() == 12) ) {
+			if ( function_exists( 'get_field' ) && get_the_ID() !== 12 ) {
 
 				echo '<div class="footer-contact">';
 
