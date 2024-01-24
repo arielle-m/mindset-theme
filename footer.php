@@ -12,9 +12,28 @@
 ?>
 
 	<footer id="colophon" class="site-footer">
-		<div class="footer-contact">
-			
-		</div><!-- .footer-contact -->
+		<?php 
+			// checks if page id is the same as the contact page id of 12
+			// if on the contact page, it won't show the address and email in the footer
+			if ( function_exists( 'get_field') && !(get_the_ID() == 12) ) {
+
+				echo '<div class="footer-contact">';
+
+				if ( get_field( 'bottom_section', 12 ) ) {
+					echo '<p>';
+					the_field( 'bottom_section', 12 );
+					echo '</p>';
+				}
+
+				if ( get_field( 'bottom_email', 12 ) ) {
+					echo '<p>';
+					the_field( 'bottom_email', 12 );
+					echo '</p>';
+				}
+
+				echo '</div>'; // <!-- .footer-contact -->
+			}; 
+		?>
 		<div class="footer-menus">
 			<nav id="footer-navigation" class="footer-navigation">
 				<?php

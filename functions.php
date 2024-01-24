@@ -225,7 +225,7 @@ add_filter( 'excerpt_more', 'fwd_excerpt_more' );
 
 // Create Block Templates for Pages
 function fwd_block_editor_templates() {
-    // Replace '14' with the Page ID
+    // Replace '61' with the Page ID
     if ( isset( $_GET['post'] ) && '61' == $_GET['post'] ) {
         $post_type_object = get_post_type_object( 'page' );
         $post_type_object->template = array(
@@ -270,13 +270,43 @@ function fwd_block_editor_templates() {
 		// prevent the user from adding, removing, or moving blocks in our template
 		$post_type_object->template_lock = 'all';
     }
+	if ( isset( $_GET['post'] ) && '12' == $_GET['post'] ) {
+        $post_type_object = get_post_type_object( 'page' );
+        $post_type_object->template = array(
+            // define blocks here...
+
+			// one way to do it:
+			// array( 'core/paragraph' ),
+			// array( 'core/heading' ),
+			// array( 'core/image' ),
+			// array( 'core/paragraph' ),
+
+			// another, more advanced, way to do it:
+
+			// each array is a block, and the stuff nested inside are attributes
+			array( 
+				'core/paragraph', 
+				array( 
+					'placeholder' => 'Add your text here...'
+				) 
+			),
+			array( 
+				'core/shortcode', 
+				array( 
+					'placeholder' => 'Add your shortcode  here...'
+				) 
+			)
+        );
+		// prevent the user from adding, removing, or moving blocks in our template
+		$post_type_object->template_lock = 'all';
+    }
 }
 add_action( 'init', 'fwd_block_editor_templates' );
 
 // Remove the block editor from certain pages
 function fwd_post_filter( $use_block_editor, $post ) {
     // Change 81 to your Page ID
-    $page_ids = array( 81 );
+    $page_ids = array( 81, 6 );
     if ( in_array( $post->ID, $page_ids ) ) {
         return false;
     } else {
