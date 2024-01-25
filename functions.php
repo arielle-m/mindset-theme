@@ -196,6 +196,13 @@ require get_template_directory() . '/inc/template-functions.php';
 require get_template_directory() . '/inc/customizer.php';
 
 /**
+ * Custom Post Types & Taxonomies
+ */
+// the get template directory goes directly to the theme folder
+require get_template_directory() . '/inc/cpt-taxonomy.php';
+
+
+/**
  * Load Jetpack compatibility file.
  */
 if ( defined( 'JETPACK__VERSION' ) ) {
@@ -316,3 +323,16 @@ function fwd_post_filter( $use_block_editor, $post ) {
     }
 }
 add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
+
+// basic cpt just to see how it works
+// look at cpt-taxonomy for the elaborate one
+// function fwd_register_custom_post_types() {
+//     $args = array(
+//         'public' => true,
+//         'label'  => 'Works'
+//     );
+// 	// always wanna prefix it
+// 	// in case you get a plugin that also has a registered post type called "work" which would cause problems
+//     register_post_type( 'fwd-work', $args );
+// }
+// add_action( 'init', 'fwd_register_custom_post_types' );
