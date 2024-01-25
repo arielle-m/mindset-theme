@@ -101,10 +101,43 @@ function fwd_register_custom_post_types() {
 
 
     // Services CPT
-
-
-
+    $labels = array(
+        'name'               => _x( 'Services', 'post type general name'  ),
+        'singular_name'      => _x( 'Service', 'post type singular name'  ),
+        'menu_name'          => _x( 'Services', 'admin menu'  ),
+        'name_admin_bar'     => _x( 'Service', 'add new on admin bar' ),
+        'add_new'            => _x( 'Add New', 'service' ),
+        'add_new_item'       => __( 'Add New Service' ),
+        'new_item'           => __( 'New Service' ),
+        'edit_item'          => __( 'Edit Service' ),
+        'view_item'          => __( 'View Service'  ),
+        'all_items'          => __( 'All Services' ),
+        'search_items'       => __( 'Search Services' ),
+        'parent_item_colon'  => __( 'Parent Services:' ),
+        'not_found'          => __( 'No services found.' ),
+        'not_found_in_trash' => __( 'No services found in Trash.' ),
+    );
     
+    $args = array(
+        'labels'             => $labels,
+        'public'             => true,
+        'publicly_queryable' => true,
+        'show_ui'            => true,
+        'show_in_menu'       => true,
+        'show_in_rest'       => true,
+        'query_var'          => true,
+        'rewrite'            => array( 'slug' => 'services' ),
+        'capability_type'    => 'post',
+        'has_archive'        => false,
+        'hierarchical'       => false,
+        'menu_position'      => 9,
+        'menu_icon'          => 'dashicons-products',
+        'supports'           => array( 'title' ),
+    );
+    
+    register_post_type( 'fwd-service', $args );
+
+
     // Job Postings CPT
     $labels = array(
         'name'                  => _x( 'Job Postings', 'post type general name' ),

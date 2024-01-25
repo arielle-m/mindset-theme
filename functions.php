@@ -336,3 +336,27 @@ add_filter( 'use_block_editor_for_post', 'fwd_post_filter', 10, 2 );
 //     register_post_type( 'fwd-work', $args );
 // }
 // add_action( 'init', 'fwd_register_custom_post_types' );
+
+// Change Service placeholder text
+function wpb_change_title_text( $title ){
+	$screen = get_current_screen();
+
+	if ( 'fwd-service' == $screen->post_type ) {
+		$title = 'Add Service name';
+	}
+	if ( 'fwd-work' == $screen->post_type ) {
+		$title = 'Add Work title';
+	}
+	if ( 'fwd-testimonial' == $screen->post_type ) {
+		$title = 'Add Testimonial title';
+	}
+	if ( 'fwd-job-posting' == $screen->post_type ) {
+		$title = 'Add Job title';
+	}
+
+	return $title;
+}
+
+add_filter( 'enter_title_here', 'wpb_change_title_text' );
+
+// Change Work placeholder text
