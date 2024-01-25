@@ -270,6 +270,8 @@ function fwd_block_editor_templates() {
 		// prevent the user from adding, removing, or moving blocks in our template
 		$post_type_object->template_lock = 'all';
     }
+
+	// Page: Contact
 	if ( isset( $_GET['post'] ) && '12' == $_GET['post'] ) {
         $post_type_object = get_post_type_object( 'page' );
         $post_type_object->template = array(

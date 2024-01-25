@@ -26,6 +26,23 @@
 				'after'  => '</div>',
 			)
 		);
+
+		if ( function_exists( 'get_field' ) ) {
+
+			if ( get_field( 'bottom_section' ) ) {
+				echo '<p>';
+				the_field( 'bottom_section' );
+				echo '</p>';
+			}
+
+			if ( get_field( 'bottom_email' ) ) {
+				$email = get_field( 'bottom_email' );
+				$mailto = 'mailto' . $email;
+				?>
+				<p><a href="<?php echo esc_url( $mailto ); ?> "><?php echo esc_html( $email ); ?></a></p>
+				<?php
+			}
+		}
 		?>
 	</div><!-- .entry-content -->
 
