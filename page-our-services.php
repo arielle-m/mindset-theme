@@ -17,102 +17,55 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+	<?php while ( have_posts() ) : the_post(); ?>
 
-			get_template_part( 'template-parts/content', 'page' );
+		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			// if ( comments_open() || get_comments_number() ) :
-			// 	comments_template();
-			// endif;
+			<header class="entry-header">
+				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+			</header>
 
-		endwhile; // End of the loop.
-		?>
+			<div class="entry-content">
+				<?php the_content(); ?>
 
-		<?php
-		$args = array(
-			'post_type'      => 'fwd-service',
-			'posts_per_page' => -1,
-			'orderby'		 => 'title',
-			'order'		     => 'ASC',
-		);
-		
-		$query = new WP_Query( $args );
-		
-		if ( $query -> have_posts() ){
-			echo '<section>';
-
-			while ( $query -> have_posts() ) {
-				$query -> the_post();
-				echo '<a href="' . get_site_url() . get_the_ID() . '">';
-				the_title();
-				echo '</a>';
-
-			}
-			wp_reset_postdata();
-			
-			echo '</section>';
-		} 
-		?>
-
-		<?php
-		$args = array(
-			'post_type'      => 'fwd-service',
-			'posts_per_page' => -1,
-			'orderby'		 => 'title',
-			'order'		     => 'ASC',
-		);
-		
-		$query = new WP_Query( $args );
-		
-		if ( $query -> have_posts() ){
-			echo '<section>';
-
-			while ( $query -> have_posts() ) {
-				$query -> the_post();
-				echo '<h2>';
-				the_title();
-				echo '</h2>';
-
-				if ( function_exists( 'get_field' ) ) {
-
-					if ( get_field( 'service' ) ) {
-						echo '<p>';
-						the_field( 'service' );
-						echo '</p>';
-					}
-				}
-			}
-			wp_reset_postdata();
-			
-			echo '</section>';
-		} 
-
-		// if ( $query -> have_posts() && function_exists( 'get_field' ) ){
-		// 	if ( get_field( 'service' ) ) {
-		// 		echo '<section>';
-
-		// 		while ( $query -> have_posts() ) {
-		// 			$query -> the_post();
-		// 			echo '<h2>';
-		// 			the_title();
-		// 			echo '</h2>';
-
-		// 			echo '<p>';
-		// 			the_field( 'service' );
-		// 			echo '</p>';
-		// 		}
+				<?php 
+				$args = array(
+					'post_type'      => 'fwd-service',
+					'posts_per_page' => -1,
+					'orderby'		 => 'title',
+					'order'		     => 'ASC',
+				);
 				
-		// 	}
-		// 	wp_reset_postdata();
+				$query = new WP_Query( $args );
+				
+				// Output Navigation
+				if ( $query -> have_posts() ){
+					while ( $query -> have_posts() ) {
+						$query -> the_post();
+
+						echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
+	
+					}
+					wp_reset_postdata();
 			
-		// 	echo '</section>';
-		// } 
+					while ( $query -> have_posts() ) {
+						$query -> the_post();
+		
+						if ( function_exists( 'get_field' ) ) {
+							if ( get_field( 'service' ) ) {
+								echo '<h2>'. esc_html( get_the_title() ) .'</h2>';
+								the_field( 'service' );
+							}
+						}
+					}
+					wp_reset_postdata();
+				} 
+				?>
+			</div>
 
-		?>
+		</article>
 
+		<?php endwhile; ?>
 	</main><!-- #primary -->
 
 <?php
