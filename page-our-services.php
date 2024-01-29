@@ -29,37 +29,59 @@ get_header();
 				<?php the_content(); ?>
 
 				<?php 
-				$args = array(
-					'post_type'      => 'fwd-service',
-					'posts_per_page' => -1,
-					'orderby'		 => 'title',
-					'order'		     => 'ASC',
-				);
-				
-				$query = new WP_Query( $args );
-				
-				// Output Navigation
-				if ( $query -> have_posts() ){
-					while ( $query -> have_posts() ) {
-						$query -> the_post();
 
-						echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
-	
-					}
-					wp_reset_postdata();
-			
-					while ( $query -> have_posts() ) {
-						$query -> the_post();
+				$terms = get_terms(
+					array(
+						// this is a poor name choice it should've been fwd=services-category but oh well
+						'taxonomy' => 'fwd-services',
+					)
+				);
+
+				if ( $terms && ! is_wp_error ( $terms ) ) :
+					foreach ( $terms as $term ) :
+						$args = array(
+							'post_type'        => 'fwd-service',
+							'posts_per_page'   => -1,
+							'orderby'		   => 'title',
+							'order'		       => 'ASC',
+							'tax_query'		   => array(
+								array(
+									'taxonomy' => 'fwd-services',
+									'field'    => 'slug',
+									'terms'    => $term->slug,
+								)
+							)
+						);
+
+						$query = new WP_Query( $args );
+						
+						if ( $query -> have_posts() ){
+							// Output Navigation
+							while ( $query -> have_posts() ) {
+								$query -> the_post();
 		
-						if ( function_exists( 'get_field' ) ) {
-							if ( get_field( 'service' ) ) {
-								echo '<h2>'. esc_html( get_the_title() ) .'</h2>';
-								the_field( 'service' );
+								echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
+			
 							}
+							wp_reset_postdata();
+							
+					
+							// Output Content
+							echo '<h2>'.$term->name.'</h2>';
+							while ( $query -> have_posts() ) {
+								$query -> the_post();
+
+								if ( function_exists( 'get_field' ) ) {
+									if ( get_field( 'service' ) ) {
+										echo '<h3>'. esc_html( get_the_title() ) .'</h3>';
+										the_field( 'service' );
+									}
+								}
+							}
+							wp_reset_postdata();
 						}
-					}
-					wp_reset_postdata();
-				} 
+					endforeach;
+				endif;
 				?>
 			</div>
 

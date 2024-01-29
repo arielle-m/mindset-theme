@@ -246,6 +246,34 @@ function fwd_register_taxonomies() {
 
     register_taxonomy( 'fwd-featured', array( 'fwd-work' ), $args );
 
+
+    // Add Service taxonomy
+    $labels = array(
+        'name'              => _x( 'Services', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Service', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Services' ),
+        'all_items'         => __( 'All Services' ),
+        'parent_item'       => __( 'Parent Services' ),
+        'parent_item_colon' => __( 'Parent Services:' ),
+        'edit_item'         => __( 'Edit Services' ),
+        'update_item'       => __( 'Update Service' ),
+        'add_new_item'      => __( 'Add New Service' ),
+        'new_item_name'     => __( 'New Work Service' ),
+        'menu_name'         => __( 'Services' ),
+    );
+
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest'      => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'services' ),
+    );
+
+    register_taxonomy( 'fwd-services', array( 'fwd-service' ), $args );
+
 }
 add_action( 'init', 'fwd_register_taxonomies');
 
