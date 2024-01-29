@@ -220,31 +220,31 @@ function fwd_register_taxonomies() {
     register_taxonomy( 'fwd-work-category', array( 'fwd-work' ), $args );
 
     // Add Featured taxonomy
-$labels = array(
-    'name'              => _x( 'Featured', 'taxonomy general name' ),
-    'singular_name'     => _x( 'Featured', 'taxonomy singular name' ),
-    'search_items'      => __( 'Search Featured' ),
-    'all_items'         => __( 'All Featured' ),
-    'parent_item'       => __( 'Parent Featured' ),
-    'parent_item_colon' => __( 'Parent Featured:' ),
-    'edit_item'         => __( 'Edit Featured' ),
-    'update_item'       => __( 'Update Featured' ),
-    'add_new_item'      => __( 'Add New Featured' ),
-    'new_item_name'     => __( 'New Work Featured' ),
-    'menu_name'         => __( 'Featured' ),
-);
+    $labels = array(
+        'name'              => _x( 'Featured', 'taxonomy general name' ),
+        'singular_name'     => _x( 'Featured', 'taxonomy singular name' ),
+        'search_items'      => __( 'Search Featured' ),
+        'all_items'         => __( 'All Featured' ),
+        'parent_item'       => __( 'Parent Featured' ),
+        'parent_item_colon' => __( 'Parent Featured:' ),
+        'edit_item'         => __( 'Edit Featured' ),
+        'update_item'       => __( 'Update Featured' ),
+        'add_new_item'      => __( 'Add New Featured' ),
+        'new_item_name'     => __( 'New Work Featured' ),
+        'menu_name'         => __( 'Featured' ),
+    );
 
-$args = array(
-    'hierarchical'      => true,
-    'labels'            => $labels,
-    'show_ui'           => true,
-    'show_admin_column' => true,
-    'show_in_rest'      => true,
-    'query_var'         => true,
-    'rewrite'           => array( 'slug' => 'featured' ),
-);
+    $args = array(
+        'hierarchical'      => true,
+        'labels'            => $labels,
+        'show_ui'           => true,
+        'show_admin_column' => true,
+        'show_in_rest'      => true,
+        'query_var'         => true,
+        'rewrite'           => array( 'slug' => 'featured' ),
+    );
 
-register_taxonomy( 'fwd-featured', array( 'fwd-work' ), $args );
+    register_taxonomy( 'fwd-featured', array( 'fwd-work' ), $args );
 
 }
 add_action( 'init', 'fwd_register_taxonomies');
