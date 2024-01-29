@@ -20,4 +20,6 @@
 		dynamic_sidebar( 'sidebar-1' ); 
 	}
 	?>
+
+	<?php get_template_part( 'template-parts/work-categories' ); ?>
 </aside><!-- #secondary -->
