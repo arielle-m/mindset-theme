@@ -20,15 +20,21 @@
 				echo '<div class="footer-contact">';
 
 				if ( get_field( 'bottom_section', 12 ) ) {
+					echo '<div class="footer-address">';
+					get_template_part( 'images/location' );
 					echo '<p>';
 					the_field( 'bottom_section', 12 );
 					echo '</p>';
+					echo '</div>';
 				}
 
 				if ( get_field( 'bottom_email', 12 ) ) {
+					echo '<div class="footer-email">';
+					get_template_part( 'images/email' );
 					echo '<p>';
 					the_field( 'bottom_email', 12 );
 					echo '</p>';
+					echo '</div>';
 				}
 
 				echo '</div>'; // <!-- .footer-contact -->

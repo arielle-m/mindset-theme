@@ -169,6 +169,14 @@ add_action( 'widgets_init', 'fwd_widgets_init' );
  * Enqueue scripts and styles.
  */
 function fwd_scripts() {
+	// load in google font open sans
+	wp_enqueue_style (
+		'fwd-googlefonts', // handle (a unique name)
+		'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap', //url
+		array(), // empty because no dependencies
+		null // version : odd one for google fonts, it's because they load it in weird or something; set null if loading multiple Google Fonts from their CDN 
+	);
+
 	wp_enqueue_style( 'fwd-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'fwd-style', 'rtl', 'replace' );
 
@@ -176,6 +184,34 @@ function fwd_scripts() {
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
+	}
+
+	// only need to load slider on home page
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'swiper-styles', // unique handle
+			get_template_directory_uri() . '/css/swiper-bundle.css', // file path
+			// cant skip parameter if wanna do 4th but not 3rd
+			array(),
+			'11.0.5'
+		);
+
+		wp_enqueue_script(
+			'swiper-scripts',
+			get_template_directory_uri() . '/js/swiper-bundle.min.js',
+			array(), // if jquery slider, cld pass in jquery as a dependency
+			'11.0.5',
+			// always set 5th parameter in javascript
+			array( 'strategy' => 'defer' ), // when creates script tag, it will add defer
+		);
+
+		wp_enqueue_script(
+			'swiper-settings',
+			get_template_directory_uri() . '/js/swiper-settings.js',
+			array( 'swiper-scripts' ), // only load this file if bundle.min.js has loaded; handles are used for dependencies to reference them
+			_S_VERSION, // use const because this isnt technically a swiper file
+			array( 'strategy' => 'defer' ),
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'fwd_scripts' );
