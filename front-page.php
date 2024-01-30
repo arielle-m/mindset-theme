@@ -72,7 +72,26 @@ get_header();
 			</section>
 
 			<section class="home-work"></section>
-
+			<?php
+				// Add an ACF relationship field and assign it to the Home page
+				if ( function_exists( 'get_field' ) ) : 
+					$featured_works = get_field('fwd-work');
+					if ($featured_works) :
+						foreach($featured_works as $post) :
+							setup_postdata($post); 
+							?>
+							<article class="front-portfolio">
+								<a href="<?php the_permalink(); ?>">
+									<?php the_post_thumbnail('medium'); ?>
+									<h3><?php the_title(); ?></h3>
+								</a>
+							</article>
+							<?php 
+						endforeach;
+						wp_reset_postdata();
+					endif;
+				endif;
+			?>
 			<section class="home-left"></section>
 			<?php
 			if ( function_exists( 'get_field' ) ) {
