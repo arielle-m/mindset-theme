@@ -75,7 +75,7 @@ get_header();
 			<?php
 				// Add an ACF relationship field and assign it to the Home page
 				if ( function_exists( 'get_field' ) ) : 
-					$featured_works = get_field('fwd-work');
+					$featured_works = get_field('featured_works');
 					if ($featured_works) :
 						foreach($featured_works as $post) :
 							setup_postdata($post); 
