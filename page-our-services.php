@@ -29,6 +29,26 @@ get_header();
 				<?php the_content(); ?>
 
 				<?php 
+				$args = array(
+					'post_type'        => 'fwd-service',
+					'posts_per_page'   => -1,
+					'orderby'		   => 'title',
+					'order'		       => 'ASC',
+				);
+
+				$query = new WP_Query( $args );
+						
+				if ( $query -> have_posts() ){
+					// Output Navigation
+					while ( $query -> have_posts() ) {
+						$query -> the_post();
+
+						echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
+	
+					}
+					wp_reset_postdata();
+					
+				}
 
 				$terms = get_terms(
 					array(
@@ -57,13 +77,13 @@ get_header();
 						
 						if ( $query -> have_posts() ){
 							// Output Navigation
-							while ( $query -> have_posts() ) {
-								$query -> the_post();
+							// while ( $query -> have_posts() ) {
+							// 	$query -> the_post();
 		
-								echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
+							// 	echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
 			
-							}
-							wp_reset_postdata();
+							// }
+							// wp_reset_postdata();
 							
 					
 							// Output Content
