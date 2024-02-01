@@ -417,6 +417,7 @@ h3,
 h4,
 h5,
 h6 {
+	font-family: "Playfair Display", serif;
 	clear: both;
 	margin: .75em 0 .25em;
 }
@@ -1024,6 +1025,19 @@ svg path {
 .site-footer a:focus path,
 .site-footer a:active path {
 	fill: #fff200;
+}
+
+.scroll-top {
+	background: transparent;
+	border: none;
+	padding: 1rem;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	cursor: pointer;
+	transition: all ease 0.3s;
+	opacity: 0;
+	color: #fff200;
 }
 
 .footer-menus {

@@ -172,7 +172,7 @@ function fwd_scripts() {
 	// load in google font open sans
 	wp_enqueue_style (
 		'fwd-googlefonts', // handle (a unique name)
-		'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap', //url
+		'https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap', //url
 		array(), // empty because no dependencies
 		null // version : odd one for google fonts, it's because they load it in weird or something; set null if loading multiple Google Fonts from their CDN 
 	);
@@ -181,6 +181,8 @@ function fwd_scripts() {
 	wp_style_add_data( 'fwd-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'fwd-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+	wp_enqueue_script( 'fwd-scroll-top', get_template_directory_uri() . '/js/scroll-top.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
