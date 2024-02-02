@@ -69,29 +69,7 @@ get_header();
 					}
 					?>
 			</section>
-
-			<section class="home-work"></section>
-			<?php
-				// Add an ACF relationship field and assign it to the Home page
-				if ( function_exists( 'get_field' ) ) : 
-					$featured_works = get_field('featured_works');
-					if ($featured_works) :
-						foreach($featured_works as $post) :
-							setup_postdata($post); 
-							?>
-							<article class="front-portfolio">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('medium'); ?>
-									<h3><?php the_title(); ?></h3>
-								</a>
-							</article>
-							<?php 
-						endforeach;
-						wp_reset_postdata();
-					endif;
-				endif;
-			?>
-			<section class="home-left"></section>
+			<section class="home-left">
 			<?php
 			if ( function_exists( 'get_field' ) ) {
 
@@ -104,7 +82,8 @@ get_header();
 				}
 			}
 			?>
-			<section class="home-right"></section>
+			</section>
+			<section class="home-right">
 			<?php
 				if ( function_exists( 'get_field' ) ) :
 
@@ -120,46 +99,46 @@ get_header();
 						echo '</p>';
 					}
 				endif;
-				?>
-				<section class="home-slider"></section>
-					<?php
-					$args = array(
-						'post_type'      => 'fwd-testimonial',
-						'posts_per_page' => -1
-					);
-
-					$query = new WP_Query( $args );
-
-					if ( $query->have_posts() ) : ?>
-						<div class="swiper">
-							<div class="swiper-wrapper">
-								<?php 
-								while ( $query->have_posts() ) : $query->the_post(); 
-								?>
-									<div class="swiper-slide">
-										<?php the_content(); ?>
-									</div>
-								<?php endwhile; ?>
-							</div>
-							<div class="swiper-pagination"></div>
-							<!-- <div class="swiper-button-prev"></div> -->
-							<!-- <div class="swiper-button-next"></div> -->
-						</div>
-						<?php
-						wp_reset_postdata();
-					endif;
-					?>
-
-				</div>
+			?>
+			</section>
+			<section class="home-slider">
 				<?php
-				// while ( $query->have_posts() ) :
+				$args = array(
+					'post_type'      => 'fwd-testimonial',
+					'posts_per_page' => -1
+				);
+
+				$query = new WP_Query( $args );
+
+				if ( $query->have_posts() ) : ?>
+					<div class="swiper">
+						<div class="swiper-wrapper">
+							<?php 
+							while ( $query->have_posts() ) : $query->the_post(); 
+							?>
+								<div class="swiper-slide">
+									<?php the_content(); ?>
+								</div>
+							<?php endwhile; ?>
+						</div>
+						<div class="swiper-pagination"></div>
+						<!-- <div class="swiper-button-prev"></div> -->
+						<!-- <div class="swiper-button-next"></div> -->
+					</div>
+					<?php
+					wp_reset_postdata();
+				endif;
+				?>
+			<?php
+			// while ( $query->have_posts() ) :
 				// 	$query->the_post();
 				// 	the_content();
 				// endwhile;
 				// wp_reset_postdata();
 				// endif;
-		?>
-			<section class="home-blog"></section>
+				?>
+			</section>
+			<section class="home-blog">
 				<!-- escapes html, makes it translatable, and echoes it out -->
 				<h2><?php esc_html_e( 'Latest Blog Posts', 'fwd' ); ?></h2>
 				<?php
@@ -199,6 +178,7 @@ get_header();
 						wp_reset_postdata();
 					}
 				?>
+			</section>
 			<?php
 		endwhile; // End of the loop.
 		?>

@@ -722,7 +722,11 @@ svg path {
 	}
 
 	.no-sidebar .site,
-	.page-template-full-width .site {
+	.page-template-full-width .site,
+	.post-type-archive-fwd-work .site,
+	.page-id-6 .site,
+	/* .fwd-work-template-default .site, */
+	.page-id-10 .site {
 		grid-template-columns: 1fr minmax(0, 1000px) 1fr;
 		grid-template-areas:
 			"header header header"
@@ -980,6 +984,100 @@ svg path {
 	grid-gap: 2em;
 }
 
+/* Home Page Styles */
+.home-work,
+.home-blog {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.home-work h2,
+.home-blog h2 {
+	width: 100%;
+}
+
+.home-work article {
+	width: 95%;
+}
+
+.home-work article a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.home-work h3,
+.home-blog h3  {
+	font-size: 1.125rem;
+	text-align: center;
+	height: 3.375rem;
+	margin: 0;
+}
+
+
+
+@media (min-width: 50em) {
+	.home-work article {
+		width: 25%;
+	}
+
+	.home-left,
+	.home-right {
+		vertical-align: top;
+		display: inline-block;
+		width: 45%;
+	}
+}
+
+/* Works Archive Styles */
+@media (min-width: 50em) {
+	.work-section {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.work-section h2 {
+		width: 100%;
+	}
+
+	.work-section article {
+		width: 33.33%;
+	}
+
+	.work-section article h3 {
+		height: 6rem;
+	}
+}
+
+
+/* Our Services Page Styles */
+.service-links {
+	background-color: #fffde8;
+	border: double #fff200 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.service-links a {
+	text-align: center;
+	width: 100%;
+	padding: 0.5rem 1rem;
+}
+
+@media (min-width: 50em) {
+	.service-links {
+		flex-direction: row;
+	}
+
+	.service-links a {
+		width: 10rem;
+		padding: 1rem;
+	}
+}
+
 /* About Page Styles */
 .page-id-10 blockquote {
 	border-left: none;
@@ -1002,7 +1100,8 @@ svg path {
 
 .site-footer>div {
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	align-items: center;
 }
 
 .site-footer>div>div {
@@ -1065,13 +1164,19 @@ svg path {
 	margin-top: 3rem;
 }
 
-.site-info {
+.site-footer .site-info {
+	flex-direction: column;
 	font-size: .75rem;
 	text-align: center;
 	margin-top: 2rem;
 }
 
 @media screen and (min-width: 43.75em) {
+
+	.site-footer>div {
+		flex-direction: row;
+		justify-content: space-between;
+	}
 
 	.footer-menus ul {
 		display: flex;

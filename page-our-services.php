@@ -40,12 +40,12 @@ get_header();
 						
 				if ( $query -> have_posts() ){
 					// Output Navigation
+					echo '<nav class="service-links">';
 					while ( $query -> have_posts() ) {
 						$query -> the_post();
-
 						echo '<a href="#' . esc_attr( get_the_ID() ) . '">'. esc_html( get_the_title() ) .'</a>';
-	
 					}
+					echo '</nav>';
 					wp_reset_postdata();
 					
 				}
