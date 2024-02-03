@@ -984,6 +984,11 @@ svg path {
 	grid-gap: 2em;
 }
 
+/* Sidebar Styles*/
+aside>h2 {
+	font-size: 1.5rem;
+}
+
 /* Home Page Styles */
 .home-work,
 .home-blog {
@@ -1009,10 +1014,10 @@ svg path {
 
 .home-work h3,
 .home-blog h3  {
-	font-size: 1.125rem;
+	font-size: 1.25rem;
 	text-align: center;
 	height: 3.375rem;
-	margin: 0;
+	margin: 0 0 0.5rem 0;
 }
 
 
@@ -1076,6 +1081,11 @@ svg path {
 		width: 10rem;
 		padding: 1rem;
 	}
+}
+
+/* Blog Styles */
+.blog .entry-footer span {
+	margin-right: 0.75rem;
 }
 
 /* About Page Styles */

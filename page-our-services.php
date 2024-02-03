@@ -93,7 +93,7 @@ get_header();
 
 								if ( function_exists( 'get_field' ) ) {
 									if ( get_field( 'service' ) ) {
-										echo '<h3>'. esc_html( get_the_title() ) .'</h3>';
+										echo '<h3 id='. esc_attr( get_the_ID() ) .'>'. esc_html( get_the_title() ) .'</h3>';
 										the_field( 'service' );
 									}
 								}
