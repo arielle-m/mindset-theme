@@ -54,6 +54,8 @@ get_header();
 
 		?>
 
+		<?php get_template_part( 'template-parts/work-categories' ); ?>
+
 	</main><!-- #primary -->
 
 <?php
